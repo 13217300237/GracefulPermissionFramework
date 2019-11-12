@@ -1,9 +1,9 @@
-package com.zhou.gracefulpermissionframework;
+package com.zhou.graceful.base;
 
 /**
  * 权限申请结果接口
  */
-public interface IPermission {
+public interface IPermissionCallback {
 
     /**
      * 授予权限

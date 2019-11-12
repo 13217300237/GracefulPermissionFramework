@@ -1,4 +1,4 @@
-package com.zhou.gracefulpermissionframework;
+package com.zhou.graceful.utils;
 
 import android.app.Activity;
 import android.content.Context;

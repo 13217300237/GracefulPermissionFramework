@@ -1,11 +1,11 @@
-package com.zhou.gracefulpermissionframework;
+package com.zhou.graceful;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-import java.util.logging.Logger;
+import com.zhou.graceful.base.BaseActivity;
+import com.zhou.graceful.consts.PermissionRequestCodeConst;
 
 public class MainActivity extends BaseActivity {
 
@@ -14,19 +14,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.btn_location).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getLocationPermission();
-            }
-        });
-
-        findViewById(R.id.btn_contact).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getContactPermission();
-            }
-        });
+        findViewById(R.id.btn_location).setOnClickListener(v -> getLocationPermission());
+        findViewById(R.id.btn_contact).setOnClickListener(v -> getContactPermission());
 
     }
 

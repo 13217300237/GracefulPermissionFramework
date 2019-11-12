@@ -1,4 +1,4 @@
-package com.zhou.gracefulpermissionframework;
+package com.zhou.graceful;
 
 import org.junit.Test;
 
