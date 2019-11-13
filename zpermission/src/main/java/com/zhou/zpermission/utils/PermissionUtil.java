@@ -1,4 +1,4 @@
-package com.zhou.graceful.utils;
+package com.zhou.zpermission.utils;
 
 import android.app.Activity;
 import android.content.Context;

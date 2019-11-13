@@ -6,7 +6,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
-import com.zhou.graceful.utils.PermissionUtil;
+import com.zhou.zpermission.utils.PermissionUtil;
+import com.zhou.zpermission.interfaces.IPermissionCallback;
 
 public abstract class BaseFragment extends Fragment implements IPermissionCallback {
 

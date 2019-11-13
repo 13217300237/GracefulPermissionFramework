@@ -6,7 +6,7 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
-import com.zhou.graceful.base.IPermissionCallback;
+import com.zhou.zpermission.interfaces.IPermissionCallback;
 
 public abstract class BaseService extends Service implements IPermissionCallback {
     @Nullable

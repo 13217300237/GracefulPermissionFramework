@@ -6,7 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.zhou.graceful.utils.PermissionUtil;
+import com.zhou.zpermission.utils.PermissionUtil;
+import com.zhou.zpermission.interfaces.IPermissionCallback;
 
 public abstract class BaseActivity extends AppCompatActivity implements IPermissionCallback {
     protected static final String TAG = "BaseActivity";

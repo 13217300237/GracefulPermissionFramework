@@ -1,4 +1,4 @@
-package com.zhou.graceful.base;
+package com.zhou.zpermission.interfaces;
 
 /**
  * 权限申请结果接口
