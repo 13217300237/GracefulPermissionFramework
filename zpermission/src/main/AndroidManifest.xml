@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhou.zpermission" />
+    package="com.zhou.zpermission">
+
+    <application>
+        <activity
+            android:name=".aspect.PermissionAspectActivity"
+            android:theme="@style/translucent" />
+    </application>
+</manifest>

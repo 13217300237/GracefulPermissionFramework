@@ -101,7 +101,7 @@ public class PermissionUtil {
     /**
      * 通过反射调用指定方法
      */
-    public static void invokAnnotation(Object object, Class annotationClass, int requestCode) {
+    public static void invokeAnnotation(Object object, Class annotationClass, int requestCode) {
 
         //获取切面上下文的类型
         Class<?> clazz = object.getClass();
