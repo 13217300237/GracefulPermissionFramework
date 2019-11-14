@@ -4,10 +4,16 @@ import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.zhou.graceful.base.BaseActivity;
-import com.zhou.graceful.consts.PermissionRequestCodeConst;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends BaseActivity {
+import com.zhou.graceful.consts.PermissionRequestCodeConst;
+import com.zhou.zpermission.annotation.PermissionDenied;
+import com.zhou.zpermission.annotation.PermissionDeniedForever;
+import com.zhou.zpermission.annotation.PermissionNeed;
+
+public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "PermissionAspectTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,56 +23,50 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.btn_location).setOnClickListener(v -> getLocationPermission());
         findViewById(R.id.btn_contact).setOnClickListener(v -> getContactPermission());
 
+//        test();
     }
 
-    //Ok，就是这么一个普通的Activity，如果我需要 读取内部存储的权限。
+    @PermissionNeed(permissions = {}, requestCode = PermissionRequestCodeConst.TEST)
+    private void test() {
+        Log.d(TAG, "");
+    }
+
+    @PermissionNeed(
+            permissions = {Manifest.permission.WRITE_CONTACTS},
+            requestCode = PermissionRequestCodeConst.REQUEST_CODE_CONTACT)
     private void getContactPermission() {
-        String[] permissions = new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS};
-        requestPermission(permissions, PermissionRequestCodeConst.REQUEST_CODE_CONTACT);
+        Log.d(TAG, "getContactPermission");
     }
 
-    //Ok，就是这么一个普通的Activity，如果我需要 读取内部存储的权限。
+    @PermissionNeed(
+            permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+            requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
     private void getLocationPermission() {
-        String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
-        requestPermission(permissions, PermissionRequestCodeConst.REQUEST_CODE_LOCATION);
+        Log.d(TAG, "getLocationPermission");
     }
 
-    @Override
-    public void granted(int requestCode) {
+    @PermissionDenied
+    private void permissionDenied(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
-                Log.e(TAG, "定位权限已经授予");
-                break;
             case PermissionRequestCodeConst.REQUEST_CODE_CONTACT:
-                Log.d(TAG, "联系人权限已经授予");
+                Log.d(TAG, "联系人权限被拒绝");
+                break;
+            case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
+                Log.d(TAG, "位置权限被拒绝");
                 break;
             default:
                 break;
         }
     }
 
-    @Override
-    public void denied(int requestCode) {
+    @PermissionDeniedForever
+    private void permissionDeniedForever(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
-                Log.e(TAG, "定位权限已经被拒");
-                break;
             case PermissionRequestCodeConst.REQUEST_CODE_CONTACT:
-                Log.d(TAG, "联系人权限已经被拒");
+                Log.d(TAG, "权限联系人被永久拒绝");
                 break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void deniedForever(int requestCode) {
-        switch (requestCode) {
             case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
-                Log.e(TAG, "定位权限已经永久被拒");
-                break;
-            case PermissionRequestCodeConst.REQUEST_CODE_CONTACT:
-                Log.d(TAG, "联系人权限已经永久被拒");
+                Log.d(TAG, "位置联系人被永久拒绝");
                 break;
             default:
                 break;
