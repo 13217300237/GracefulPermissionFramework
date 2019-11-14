@@ -22,17 +22,12 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_location).setOnClickListener(v -> getLocationPermission());
         findViewById(R.id.btn_contact).setOnClickListener(v -> getContactPermission());
+        findViewById(R.id.btn_java_clz).setOnClickListener(v -> new LocationUtil().getLocation());
 
-//        test();
-    }
-
-    @PermissionNeed(permissions = {}, requestCode = PermissionRequestCodeConst.TEST)
-    private void test() {
-        Log.d(TAG, "");
     }
 
     @PermissionNeed(
-            permissions = {Manifest.permission.WRITE_CONTACTS},
+            permissions = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS,Manifest.permission.GET_ACCOUNTS},
             requestCode = PermissionRequestCodeConst.REQUEST_CODE_CONTACT)
     private void getContactPermission() {
         Log.d(TAG, "getContactPermission");
@@ -44,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission");
     }
+
 
     @PermissionDenied
     private void permissionDenied(int requestCode) {

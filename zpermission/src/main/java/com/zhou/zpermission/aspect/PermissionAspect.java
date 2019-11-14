@@ -89,18 +89,6 @@ public class PermissionAspect {
      */
     @Around("requestPermission(permissionNeed)")
     public void doPermission(final ProceedingJoinPoint joinPoint, PermissionNeed permissionNeed) {
-
-        //既然找到了切入点，那么我如何去进行无差别权限申请呢？
-
-//        Log.d(TAG, "around 改造切入方法--执行前");
-//        try {
-//            joinPoint.proceed(); //这个便是执行切入点的原逻辑
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-//        Log.d(TAG, "around 改造切入方法--执行后");
-
-
         //策略，当切入点函数被执行的时候，启动一个透明Activity（取消Activity切换动画）。让这个Activity替代我们进行权限申请，并且处理回调结果
         PermissionAspectActivity.startActivity(getContext(joinPoint), permissionNeed.permissions(), permissionNeed.requestCode(), new IPermissionCallback() {
             @Override

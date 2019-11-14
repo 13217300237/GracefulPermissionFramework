@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,7 @@ public class PermissionAspectActivity extends AppCompatActivity {
      * 启动当前这个Activity
      */
     public static void startActivity(Context context, String[] permissions, int requestCode, IPermissionCallback callback) {
+        Log.d("PermissionAspectTag", "context is : " + context.getClass().getSimpleName());
         if (context == null) return;
         mCallback = callback;
         //启动当前这个Activiyt并且取消切换动画
@@ -32,8 +34,10 @@ public class PermissionAspectActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);//开启新的任务栈并且清除栈顶...为何要清除栈顶
         intent.putExtra(permissionsTag, permissions);
         intent.putExtra(requestCodeTag, requestCode);
-        context.startActivity(intent);
-        if (context instanceof Activity) {
+
+        context.startActivity(intent);//利用context启动activity
+
+        if (context instanceof Activity) {//并且，如果是activity启动的，那么还要屏蔽掉activity切换动画
             ((Activity) context).overridePendingTransition(0, 0);
         }
     }
