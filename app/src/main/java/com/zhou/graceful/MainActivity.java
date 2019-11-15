@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.zhou.graceful.consts.PermissionRequestCodeConst;
 import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     @PermissionNeed(
             permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
-            requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
+            requestCode = 1)
     private void getLocationPermission() {
         ToastUtil.showToast(this, "Activity:成功获得权限");
     }
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @PermissionDenied
     private void permissionDenied(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
+            case 1:
                 ToastUtil.showToast(this, "Activity:权限被拒绝");
                 break;
             default:
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     @PermissionDeniedForever
     private void permissionDeniedForever(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
+            case 1:
                 ToastUtil.showToast(this, "Activity:权限被永久拒绝");
                 break;
             default:

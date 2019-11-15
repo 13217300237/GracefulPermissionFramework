@@ -4,11 +4,9 @@ import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.zhou.graceful.consts.PermissionRequestCodeConst;
 import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
@@ -28,8 +26,8 @@ public class MyService extends Service {
     }
 
     @PermissionNeed(
-            permissions = {Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR},
-            requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
+            permissions = {Manifest.permission.CAMERA},
+            requestCode = 2)
     private void getLocation() {
         ToastUtil.showToast(this, "Service:权限被已申请成功");
     }

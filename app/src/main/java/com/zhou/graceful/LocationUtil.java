@@ -2,10 +2,8 @@ package com.zhou.graceful;
 
 import android.Manifest;
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 
-import com.zhou.graceful.consts.PermissionRequestCodeConst;
 import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
@@ -19,10 +17,11 @@ public class LocationUtil {
 
 
     @PermissionNeed(
-            permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
-            requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
+            permissions = {Manifest.permission.BODY_SENSORS},
+            requestCode = 0)
     public void getLocation() {
         Application application = ApplicationUtil.getApplication();
+        Log.d("LocationUtilTag","普通Java类：权限已获得");
         ToastUtil.showToast(application, "普通Java类：权限已获得");
     }
 
@@ -34,12 +33,14 @@ public class LocationUtil {
     @PermissionDenied
     private void denied(int requestCode) {
         Application application = ApplicationUtil.getApplication();
+        Log.d("LocationUtilTag","普通Java类：权限被拒绝");
         ToastUtil.showToast(application, "普通Java类：权限被拒绝");
     }
 
     @PermissionDeniedForever
     private void deniedForever(int requestCode) {
         Application application = ApplicationUtil.getApplication();
+        Log.d("LocationUtilTag","普通Java类：权限被永久拒绝");
         ToastUtil.showToast(application, "普通Java类：权限被永久拒绝");
     }
 }

@@ -2,7 +2,6 @@ package com.zhou.graceful;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.zhou.graceful.consts.PermissionRequestCodeConst;
 import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
@@ -32,8 +30,8 @@ public class MyFragment extends Fragment {
     }
 
     @PermissionNeed(
-            permissions = {Manifest.permission.BODY_SENSORS, Manifest.permission.CAMERA},
-            requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
+            permissions = {Manifest.permission.READ_CALENDAR},
+            requestCode = 2)
     private void getLocation() {
         ToastUtil.showToast(getActivity(), "Fragment:权限已申请成功");
     }
