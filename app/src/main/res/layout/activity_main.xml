@@ -11,21 +11,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="MainActivity内部方法请求单个权限（定位）" />
-
-    <Button
-        android:id="@+id/btn_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="MainActivity内部方法请求单个权限（联系人）" />
+        android:text="Activity内部请求权限" />
 
     <Button
         android:id="@+id/btn_java_clz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="普通java类申请位置权限 " />
+        android:text="普通java类申请权限 " />
 
+    <Button
+        android:id="@+id/btn_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="启动Service并且申请权限" />
+
+    <FrameLayout
+        android:id="@+id/contentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimaryDark" />
 
 </LinearLayout>

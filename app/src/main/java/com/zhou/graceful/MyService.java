@@ -1,29 +1,37 @@
 package com.zhou.graceful;
 
 import android.Manifest;
-import android.app.Application;
-import android.content.Context;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.zhou.graceful.consts.PermissionRequestCodeConst;
 import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
 import com.zhou.zpermission.annotation.PermissionNeed;
-import com.zhou.zpermission.utils.ApplicationUtil;
 
-/**
- * 普通类
- */
-public class LocationUtil {
+public class MyService extends Service {
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        getLocation();
+        return super.onStartCommand(intent, flags, startId);
+    }
 
     @PermissionNeed(
-            permissions = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS},
+            permissions = {Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR},
             requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
-    public void getLocation() {
-        Application application = ApplicationUtil.getApplication();
-        ToastUtil.showToast(application, "普通Java类：权限已获得");
+    private void getLocation() {
+        ToastUtil.showToast(this, "Service:权限被已申请成功");
     }
 
     /**
@@ -33,13 +41,11 @@ public class LocationUtil {
      */
     @PermissionDenied
     private void denied(int requestCode) {
-        Application application = ApplicationUtil.getApplication();
-        ToastUtil.showToast(application, "普通Java类：权限被拒绝");
+        ToastUtil.showToast(this, "Service:权限被拒绝");
     }
 
     @PermissionDeniedForever
     private void deniedForever(int requestCode) {
-        Application application = ApplicationUtil.getApplication();
-        ToastUtil.showToast(application, "普通Java类：权限被永久拒绝");
+        ToastUtil.showToast(this, "Service:权限被永久拒绝");
     }
 }

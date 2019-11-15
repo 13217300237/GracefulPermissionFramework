@@ -1,54 +1,48 @@
 package com.zhou.graceful;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.zhou.graceful.consts.PermissionRequestCodeConst;
+import com.zhou.graceful.tools.ToastUtil;
 import com.zhou.zpermission.annotation.PermissionDenied;
 import com.zhou.zpermission.annotation.PermissionDeniedForever;
 import com.zhou.zpermission.annotation.PermissionNeed;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "PermissionAspectTag";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        showFragment();
 
         findViewById(R.id.btn_location).setOnClickListener(v -> getLocationPermission());
-        findViewById(R.id.btn_contact).setOnClickListener(v -> getContactPermission());
         findViewById(R.id.btn_java_clz).setOnClickListener(v -> new LocationUtil().getLocation());
+        findViewById(R.id.btn_service).setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, MyService.class);
+            startService(i);
+        });
 
-    }
-
-    @PermissionNeed(
-            permissions = {Manifest.permission.READ_CONTACTS,Manifest.permission.WRITE_CONTACTS,Manifest.permission.GET_ACCOUNTS},
-            requestCode = PermissionRequestCodeConst.REQUEST_CODE_CONTACT)
-    private void getContactPermission() {
-        Log.d(TAG, "getContactPermission");
     }
 
     @PermissionNeed(
             permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
             requestCode = PermissionRequestCodeConst.REQUEST_CODE_LOCATION)
     private void getLocationPermission() {
-        Log.d(TAG, "getLocationPermission");
+        ToastUtil.showToast(this, "Activity:成功获得权限");
     }
-
 
     @PermissionDenied
     private void permissionDenied(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_CONTACT:
-                Log.d(TAG, "联系人权限被拒绝");
-                break;
             case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
-                Log.d(TAG, "位置权限被拒绝");
+                ToastUtil.showToast(this, "Activity:权限被拒绝");
                 break;
             default:
                 break;
@@ -58,14 +52,26 @@ public class MainActivity extends AppCompatActivity {
     @PermissionDeniedForever
     private void permissionDeniedForever(int requestCode) {
         switch (requestCode) {
-            case PermissionRequestCodeConst.REQUEST_CODE_CONTACT:
-                Log.d(TAG, "权限联系人被永久拒绝");
-                break;
             case PermissionRequestCodeConst.REQUEST_CODE_LOCATION:
-                Log.d(TAG, "位置联系人被永久拒绝");
+                ToastUtil.showToast(this, "Activity:权限被永久拒绝");
                 break;
             default:
                 break;
         }
     }
+
+    /**
+     * 显示这个测试用的Fragment
+     */
+    private void showFragment() {
+
+        MyFragment fragment = MyFragment.getInstance();
+
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.contentFrame, fragment, "myFragment");
+        fragmentTransaction.show(fragment);
+        fragmentTransaction.commit();
+    }
+
 }
