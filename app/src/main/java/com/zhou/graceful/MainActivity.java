@@ -1,3 +1,4 @@
+
 package com.zhou.graceful;
 
 import android.Manifest;
@@ -34,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
             permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
             requestCode = 1)
     private void getLocationPermission() {
-        ToastUtil.showToast(this, "Activity:成功获得权限");
+        ToastUtil.showToast( "Activity:成功获得权限");
     }
 
     @PermissionDenied
     private void permissionDenied(int requestCode) {
         switch (requestCode) {
             case 1:
-                ToastUtil.showToast(this, "Activity:权限被拒绝");
+                ToastUtil.showToast( "Activity:权限被拒绝");
                 break;
             default:
                 break;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private void permissionDeniedForever(int requestCode) {
         switch (requestCode) {
             case 1:
-                ToastUtil.showToast(this, "Activity:权限被永久拒绝");
+                ToastUtil.showToast("Activity:权限被永久拒绝");
                 break;
             default:
                 break;

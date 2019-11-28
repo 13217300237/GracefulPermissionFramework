@@ -29,7 +29,7 @@ public class MyService extends Service {
             permissions = {Manifest.permission.CAMERA},
             requestCode = 2)
     private void getLocation() {
-        ToastUtil.showToast(this, "Service:权限被已申请成功");
+        ToastUtil.showToast("Service:权限被已申请成功");
     }
 
     /**
@@ -39,11 +39,11 @@ public class MyService extends Service {
      */
     @PermissionDenied
     private void denied(int requestCode) {
-        ToastUtil.showToast(this, "Service:权限被拒绝");
+        ToastUtil.showToast("Service:权限被拒绝");
     }
 
     @PermissionDeniedForever
     private void deniedForever(int requestCode) {
-        ToastUtil.showToast(this, "Service:权限被永久拒绝");
+        ToastUtil.showToast("Service:权限被永久拒绝");
     }
 }

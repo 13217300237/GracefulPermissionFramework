@@ -33,7 +33,7 @@ public class MyFragment extends Fragment {
             permissions = {Manifest.permission.READ_CALENDAR},
             requestCode = 2)
     private void getLocation() {
-        ToastUtil.showToast(getActivity(), "Fragment:权限已申请成功");
+        ToastUtil.showToast("Fragment:权限已申请成功");
     }
 
     /**
@@ -43,11 +43,11 @@ public class MyFragment extends Fragment {
      */
     @PermissionDenied
     private void denied(int requestCode) {
-        ToastUtil.showToast(getActivity(), "Fragment:权限被拒绝");
+        ToastUtil.showToast("Fragment:权限被拒绝");
     }
 
     @PermissionDeniedForever
     private void deniedForever(int requestCode) {
-        ToastUtil.showToast(getActivity(), "Fragment:权限被永久拒绝");
+        ToastUtil.showToast("Fragment:权限被永久拒绝");
     }
 }
